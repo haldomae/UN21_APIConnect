@@ -22,7 +22,7 @@ public class APIConnect : MonoBehaviour
         // 非同期通信(コルーチン)で指定したURLから情報を取得
         StartCoroutine(
             // 実行したい関数
-            
+            GetPokemonData(url)
         )
     }
 
@@ -30,5 +30,15 @@ public class APIConnect : MonoBehaviour
     void Update()
     {
         
+    }
+
+    // 外部から情報を取得する関数
+    // 非同期(コルーチン)で情報を取得
+    // 非同期(コルーチン)とは、
+    // -> 一時停止と再開が可能な特別な処理
+    // 非同期通信をする場合は「IEnumerator」を付ける
+    IEnumerator GetPokemonData(string url)
+    {
+
     }
 }
