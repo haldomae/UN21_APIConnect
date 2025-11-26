@@ -14,7 +14,7 @@ public class APIConnect : MonoBehaviour
     void Start()
     {
         // TMPのコンポーネントを取得
-        tmp = GetComponet<TextMeshProUGUI>();
+        tmp = GetComponent<TextMeshProUGUI>();
         // 情報を取得したいURL(文字列 : string)
         string url 
         = "https://pokeapi.co/api/v2/pokemon/ditto";
@@ -23,7 +23,7 @@ public class APIConnect : MonoBehaviour
         StartCoroutine(
             // 実行したい関数
             GetPokemonData(url)
-        )
+        );
     }
 
     // Update is called once per frame
@@ -39,6 +39,16 @@ public class APIConnect : MonoBehaviour
     // 非同期通信をする場合は「IEnumerator」を付ける
     IEnumerator GetPokemonData(string url)
     {
+        // 依頼先(送り先)を用意(request)
+        UnityWebRequest request = 
+        UnityWebRequest.Get(url);
 
+        // 通信を開始
+        // リクエストが完了(データが到着)するまで待機
+        // リクエストを送信し、応答が帰ってくるまで処理を一時停止
+        yield return request.SendWebRequest();
+
+        // 到着したJSONをTMPに表示
+        tmp.text = request.downloadHandler.text;
     }
 }
